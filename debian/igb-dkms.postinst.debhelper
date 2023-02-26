@@ -4,7 +4,7 @@
 
 DKMS_NAME=igb
 DKMS_PACKAGE_NAME=$DKMS_NAME-dkms
-DKMS_VERSION=5.7.2
+DKMS_VERSION=5.3.5.42
 
 postinst_found=0
 

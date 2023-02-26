@@ -1,5 +1,5 @@
-igb-dkms (5.7.2-debian) UNRELEASED; urgency=medium
+igb-dkms (5.3.5.42-0debian1) UNRELEASED; urgency=medium
 
   * Initial release.
 
- -- Luuk Bobeldijk <luuk.bobeldijk@dds.nl>  Thu, 11 Feb 2023 21:07:33 +0100
+ -- You-Sheng Yang <vicamo@gmail.com>  Thu, 28 Nov 2019 15:53:16 +0800

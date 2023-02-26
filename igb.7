@@ -5,7 +5,7 @@
 .\" * Other names and brands may be claimed as the property of others.
 .\"
 .
-.TH igb 1 "March 2, 2021"
+.TH igb 1 "February 23, 2017"
 .SH NAME
 igb \-This file describes the Linux* Base Driver
 for the Gigabit Family of Adapters.
@@ -63,8 +63,10 @@ increased CPU utilization, though it may help throughput in some circumstances.
   on the system and can lower CPU utilization under heavy load, but will
   increase latency as packets are not processed as quickly.
 
-.IP
-NOTE: InterruptThrottleRate is NOT supported by 82542, 82543, or 82544-based adapters.
+ .IP
+NOTE:
+- Un-supported Adapters: InterruptThrottleRate is NOT supported by
+  82542, 82543, or 82544-based adapters.
 .LP
 .B LLIPort
 .IP
@@ -100,7 +102,7 @@ than the specified size.
 .IP
 .B Valid Range: 0-2 (0 = Legacy Int, 1 = MSI and 2 = MSI-X)
 .IP
-IntMode controls the allowed load time control over the type of interrupt
+IntMode controls allow load time control over the type of interrupt
 registered for by the driver. MSI-X is required for multiple queue
 support, and some kernels and combinations of kernel .config options
 will force a lower level of interrupt support.
@@ -114,6 +116,9 @@ will force a lower level of interrupt support.
 .IP
 X = Assign X queues, where X is less than or equal to the maximum number of
 queues (8 queues).
+The driver allows maximum supported queue value. For example,
+I350-based adapters allow RSS=8, where 8 queues is the maximum allowable
+queues.
 .IP
 NOTE: For 82575-based adapters, the maximum number of queues is 4; for
 82576-based and newer adapters it is 8; for I210-based adapters it is 4
@@ -223,22 +228,32 @@ Turning on DMA Coalescing may save energy with kernel 2.6.32 and newer. DMA Coal
 This parameter is only relevant for I350 devices operating in SR-IOV mode.
 When this parameter is set, the driver detects malicious VF driver and
 disables its Tx/Rx queues until a VF driver reset occurs.
-.B Jumbo Frames
+.SH Jumbo Frames
 .LP
 Jumbo Frames support is enabled by changing the Maximum Transmission Unit (MTU) to a value larger than the default value of 1500.
 
-Use the ip command to increase the MTU size. For example, enter the following where <ethX> is the interface number:
+Use the ifconfig command to increase the MTU size. For example, enter the following where <ethX> is the interface number:
+
+# ifconfig <ethX> mtu 9000 up
+
+Alternatively, you can use the ip command as follows:
 
 # ip link set mtu 9000 dev <ethX>
 # ip link set up dev <ethX>
 
 .LP
-NOTE: The maximum MTU setting for jumbo frames is 9216. This corresponds to the maximum jumbo frame size of 9234 bytes.
+NOTE: The maximum MTU setting for Jumbo Frames is 9216. This value coincides with the maximum Jumbo Frames size of 9234 bytes.
 
-NOTE: Using jumbo frames at 10 or 100 Mbps is not supported and may result in poor performance or loss of link.
+NOTE: Using Jumbo frames at 10 or 100 Mbps is not supported and may result in poor performance or loss of link.
 
 NOTE: Packet loss may have a greater impact on throughput when you use jumbo frames. If you observe a drop in performance after enabling jumbo frames, enabling flow control may mitigate the issue.
 See the section "Jumbo Frames" in the Readme.
+.SH ethtool
+.LP
+The driver utilizes the ethtool interface for driver configuration and diagnostics, as well as displaying statistical information. The latest ethtool version is required for this functionality. Download it at:
+https://kernel.org/pub/software/network/ethtool/
+
+
 .LP
 .B LRO
 .IP
@@ -253,10 +268,13 @@ decreasing CPU utilization for receives.
 .IP
 NOTE: LRO requires 2.4.22 or later kernel version.
 .IP
-IGB_LRO is a compile time flag. The user can enable it at compile time to add support for LRO from the driver. The flag is used by adding CFLAGS_EXTRA="-DIGB_LRO" to the make file when it's being compiled.
+IGB_LRO is a compile time flag. The user can enable it at compile time to add
+support for LRO from the driver. The flag is used by adding
+CFLAGS_EXTRA="-DIGB_LRO" to the make file when it's being compiled.
 # make CFLAGS_EXTRA="-DIGB_LRO" install
 .IP
-You can verify that the driver is using LRO by looking at these counters in ethtool:
+You can verify that the driver is using LRO by looking at these counters in
+ethtool:
 .LP
 - lro_aggregated - counts total packets that were combined
 .LP
@@ -266,12 +284,6 @@ You can verify that the driver is using LRO by looking at these counters in etht
   recycling
 .IP
 NOTE: IPv6 and UDP are not supported by LRO.
-.B ethtool
-.LP
-The driver utilizes the ethtool interface for driver configuration and diagnostics, as well as displaying statistical information. The latest ethtool version is required for this functionality. Download it at:
-https://kernel.org/pub/software/network/ethtool/
-
-
 .SH SUPPORT
 .LP
 For additional information regarding building and installation, see the

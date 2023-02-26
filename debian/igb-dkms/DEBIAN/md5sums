@@ -1,7 +1,8 @@
-a815dc6d9445422d0f3d45882dc83d87  usr/share/doc/igb-dkms/changelog.Debian.gz
+5f3984a9c1341bb02da3bc119b9132c4  usr/share/doc/igb-dkms/changelog.Debian.gz
 21acf425fdef16a69cbc594ab520a7d2  usr/src/igb-5.3.5.42/Makefile
 67c8d7325c6694e4aeb860332e754919  usr/src/igb-5.3.5.42/Module.supported
 624a96254112c3165de0f148d0b7633a  usr/src/igb-5.3.5.42/common.mk
+e13fba599e32105faa7d067510052e93  usr/src/igb-5.3.5.42/dkms.conf
 857dac80fcebc00f2f3cfb2375c0f69a  usr/src/igb-5.3.5.42/e1000_82575.c
 eddf71c4a2244b2c247f66ab3a20f1a1  usr/src/igb-5.3.5.42/e1000_82575.h
 5f5c2fda227857690567a09dc86a6fc6  usr/src/igb-5.3.5.42/e1000_api.c
@@ -42,4 +43,3 @@ ad0e480b4f0eaa95d6f369c939b3f134  usr/src/igb-5.3.5.42/kcompat_overflow.h
 8d50e628f0bc139f2f31e8cde96f8b36  usr/src/igb-5.3.5.42/kcompat_sles_defs.h
 be7bbdef32fabeaf2ee5d0a0e6b2aafb  usr/src/igb-5.3.5.42/kcompat_std_defs.h
 2feed379c6d843e6b2ec0fd0e6582f8e  usr/src/igb-5.3.5.42/kcompat_ubuntu_defs.h
-6aefe8389857467590a2f872ae6b3052  usr/src/igb-5.7.2/dkms.conf
