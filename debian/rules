@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+include /usr/share/dpkg/pkg-info.mk
+
+DKMS_PACKAGE_NAME=$(patsubst %-dkms,%,$(DEB_SOURCE))
+DKMS_PACKAGE_VERSION=$(DEB_VERSION_UPSTREAM)
+GENERATED_DKMS_FILES= \
+  debian/$(DEB_SOURCE).install \
+  debian/$(DEB_SOURCE).dkms
+
+
+%:
+	dh $@ --with dkms
+
+override_dh_fixperms:
+	dh_fixperms
+	chmod 0644 debian/$(DEB_SOURCE)/usr/src/*/*
+
+override_dh_install: debian/$(DEB_SOURCE).install
+	dh_install --exclude=.gitignore
+
+override_dh_dkms: debian/$(DEB_SOURCE).dkms
+	dh_dkms -V $(DKMS_PACKAGE_VERSION)
+
+$(GENERATED_DKMS_FILES) : $(GENERATED_DKMS_FILES:=.in) debian/rules
+	sed -e 's,@DKMS_PACKAGE_NAME@,$(DKMS_PACKAGE_NAME),g' \
+	    -e 's,@DKMS_PACKAGE_VERSION@,$(DKMS_PACKAGE_VERSION),g' \
+	    <$(@:=.in) >$@

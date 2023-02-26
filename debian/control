@@ -1,0 +1,8 @@
+Source: igb-dkms
+Maintainer: SweetCoding.org <support@sweetcoding.org>
+Build-Depends: debhelper (>= 9), dkms
+
+Package: igb-dkms
+Architecture: all
+Depends: ${misc:Depends}
+Description: DKMS source for the Intel igb network driver

@@ -1,0 +1,7 @@
+Package: igb-dkms
+Version: 5.7.2-debian
+Architecture: all
+Maintainer: SweetCoding.org <support@sweetcoding.org>
+Installed-Size: 1421
+Depends: dkms (>= 2.1.0.0)
+Description: DKMS source for the Intel igb network driver
